@@ -1,14 +1,41 @@
-version: 2.1
+version: 2 
 jobs:
-  say-hello:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+ one:
+  docker: 
+   - image: cimg/ruby:3.0.2 
+     auth:
+       username: mydockerhub-user
+       password: $DOCKERHUB_PASSWORD * context / project UI env-var reference     steps:
+    - checkout 
+    - run: echo "A first hello"
+    - run: mkdir -p my_workspace
+    - run: echo "Trying out workspaces" > my_workspace/echo-output 
+    - persist_to_workspace:
+       root: my_workspace 
+       paths:
+        - echo-output
+ two:
+  docker:
+   - image: cimg/ruby:3.0.2 
+     auth:
+     username: mydockerhub-user
+     password: $DOCKERHUB PASSWORD context / project UI env-var reference   steps:
+   – checkout 
+   - run: echo "A more familiar hi" 
+   - attach_workspace:
+      at: my_workspace
+   - run: |
+       if [[ $ (cat my_workspace/echo-output) = "Trying out workspaces" ]]; then
+         echo "It worked!"; 
+       else
+         echo "Nope!"; exit 1
+       fi 
 workflows:
-  say-hello-workflow:
-    jobs:
-      
+ version: 2
+ one_and_two:
+  jobs:
+   - one
+   - two:
+      requires:
+       - one
+   
