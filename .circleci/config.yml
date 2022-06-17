@@ -5,7 +5,8 @@ jobs:
    - image: cimg/ruby:3.0.2 
      auth:
        username: mydockerhub-user
-       password: $DOCKERHUB_PASSWORD * context / project UI env-var reference     steps:
+       password: $DOCKERHUB_PASSWORD * context / project UI env-var reference    
+  steps:
     - checkout 
     - run: echo "A first hello"
     - run: mkdir -p my_workspace
@@ -19,7 +20,8 @@ jobs:
    - image: cimg/ruby:3.0.2 
      auth:
      username: mydockerhub-user
-     password: $DOCKERHUB PASSWORD context / project UI env-var reference   steps:
+     password: $DOCKERHUB PASSWORD context / project UI env-var reference   
+  steps:
    – checkout 
    - run: echo "A more familiar hi" 
    - attach_workspace:
